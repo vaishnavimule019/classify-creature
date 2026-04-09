@@ -13,6 +13,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Space Grotesk', 'system-ui', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -46,6 +50,18 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        organic: {
+          DEFAULT: "hsl(var(--organic))",
+          foreground: "hsl(var(--organic-foreground))",
+        },
+        recyclable: {
+          DEFAULT: "hsl(var(--recyclable))",
+          foreground: "hsl(var(--recyclable-foreground))",
+        },
+        hazardous: {
+          DEFAULT: "hsl(var(--hazardous))",
+          foreground: "hsl(var(--hazardous-foreground))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
