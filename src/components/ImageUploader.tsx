@@ -1,6 +1,7 @@
 import { useRef, useState, useCallback } from "react";
 import { Upload, Camera, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CameraCapture } from "@/components/CameraCapture";
 
 interface ImageUploaderProps {
   onImageSelected: (file: File) => void;
@@ -11,8 +12,8 @@ interface ImageUploaderProps {
 
 export function ImageUploader({ onImageSelected, previewUrl, onClear, isAnalyzing }: ImageUploaderProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const cameraInputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [showCamera, setShowCamera] = useState(false);
 
   const handleFile = useCallback(
     (file: File) => {
@@ -32,6 +33,18 @@ export function ImageUploader({ onImageSelected, previewUrl, onClear, isAnalyzin
     },
     [handleFile]
   );
+
+  if (showCamera) {
+    return (
+      <CameraCapture
+        onCapture={(file) => {
+          setShowCamera(false);
+          onImageSelected(file);
+        }}
+        onClose={() => setShowCamera(false)}
+      />
+    );
+  }
 
   if (previewUrl) {
     return (
@@ -85,22 +98,10 @@ export function ImageUploader({ onImageSelected, previewUrl, onClear, isAnalyzin
         }}
       />
 
-      <input
-        ref={cameraInputRef}
-        type="file"
-        accept="image/*"
-        capture="environment"
-        className="hidden"
-        onChange={(e) => {
-          const file = e.target.files?.[0];
-          if (file) handleFile(file);
-        }}
-      />
-
       <Button
         variant="outline"
         className="w-full"
-        onClick={() => cameraInputRef.current?.click()}
+        onClick={() => setShowCamera(true)}
       >
         <Camera className="w-4 h-4 mr-2" />
         Capture with Camera
