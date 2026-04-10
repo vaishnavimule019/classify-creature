@@ -1,6 +1,7 @@
 import { useRef, useState, useCallback } from "react";
 import { Upload, Camera, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CameraCapture } from "@/components/CameraCapture";
 
 interface ImageUploaderProps {
   onImageSelected: (file: File) => void;
